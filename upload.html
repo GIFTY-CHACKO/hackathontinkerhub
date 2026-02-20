@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if success %}
+    <div class="alert">
+        <h3>✅ Report Submitted!</h3>
+        <p>Collectors in your area have been notified.</p>
+    </div>
+
+    <h3>Matching Collectors Found:</h3>
+    
+    {% if collectors|length > 0 %}
+        {% for collector in collectors %}
+            <div class="feedback-card">
+                <h4>{{ collector.name }}</h4>
+                <p><strong>Company:</strong> {{ collector.company_name or 'N/A' }}</p>
+                <p><strong>Area:</strong> {{ collector.area }}</p>
+                <p><strong>Phone:</strong> {{ collector.phone }}</p>
+                <p><strong>Email:</strong> {{ collector.email }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No collectors found for this specific area yet.</p>
+    {% endif %}
+    
+    <a href="/" class="btn btn-upload" style="width: 200px; margin: 20px auto;">Back Home</a>
+
+{% else %}
+    <div class="form-box">
+        <h2>Report Illegal Waste Dumping</h2>
+        <form method="POST" enctype="multipart/form-data" action="/report">
+            <label>Upload Image:</label>
+            <input type="file" name="image" required>
+            
+            <label>Location (City/Area):</label>
+            <input type="text" name="location" placeholder="e.g., konni" required>
+            
+            <label>Description:</label>
+            <textarea name="description" rows="4" placeholder="Describe the waste..."></textarea>
+            
+            <button type="submit">Submit Report</button>
+        </form>
+    </div>
+{% endif %}
+{% endblock %}

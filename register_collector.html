@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-box">
+    <h2>Register as a Waste Collector</h2>
+    <form method="POST" action="/collector">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        
+        <label>Company Name:</label>
+        <input type="text" name="company" placeholder="Optional">
+        
+        <label>Address:</label>
+        <textarea name="address" rows="2"></textarea>
+        
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" required>
+        
+        <label>Area Covered:</label>
+        <input type="text" name="area" placeholder="e.g., konni" required>
+        
+        <button type="submit">Register Collector</button>
+    </form>
+</div>
+{% endblock %}

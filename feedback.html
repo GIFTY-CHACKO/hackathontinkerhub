@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-box">
+    <h2>Leave Feedback</h2>
+    <form method="POST" action="/feedback">
+        <label>Your Name:</label>
+        <input type="text" name="name" required>
+        
+        <label>Message:</label>
+        <textarea name="message" rows="3"></textarea>
+        
+        <label>Rating:</label>
+        <select name="rating">
+            <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+            <option value="4">⭐⭐⭐⭐ (Good)</option>
+            <option value="3">⭐⭐⭐ (Average)</option>
+            <option value="2">⭐⭐ (Poor)</option>
+            <option value="1">⭐ (Very Poor)</option>
+        </select>
+        
+        <button type="submit">Submit Feedback</button>
+    </form>
+</div>
+
+<hr style="border-color: #333; margin: 40px 0;">
+
+<h2>Recent Feedback</h2>
+{% if feedbacks %}
+    {% for item in feedbacks %}
+        <div class="feedback-card">
+            <div class="rating">
+                {% for i in range(item.rating) %}⭐{% endfor %}
+            </div>
+            <h4>{{ item.name }}</h4>
+            <p>{{ item.message }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No feedback yet.</p>
+{% endif %}
+{% endblock %}
